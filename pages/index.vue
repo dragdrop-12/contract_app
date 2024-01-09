@@ -104,117 +104,82 @@ watch(file, (file) => {
   
 })
 // Improved initializeCropper function
-// watch(isCropping , (isCropping) => {
-//   if(isCropping){
-//     if (cropper) {
-//         cropper.destroy();
-//       };
-//       nextTick(() => {
-//         cropper = new Cropper(imageElement.value as HTMLImageElement, {
-//         dragMode: 'crop',
-//         cropBoxMovable: true,
-//         cropBoxResizable: true,
+watch(isCropping , (isCropping) => {
+  if(isCropping){
+    if (cropper) {
+        cropper.destroy();
+      };
+      nextTick(() => {
+        cropper = new Cropper(imageElement.value as HTMLImageElement, {
+        dragMode: 'crop',
+        cropBoxMovable: true,
+        cropBoxResizable: true,
        
-//         // croper must be in the size of the image in the first place
+        // croper must be in the size of the image in the first place
               
 
-//         // Other cropper options as needed
+        // Other cropper options as needed
        
-//       });
+      });
 
-//     });
-    
-//   }
-//   else{
-//     if (cropper) {
-//       const croppedDataURL = cropper.getCroppedCanvas().toDataURL("image/png");
-//       // Rest of the code...
-//       if (imageElement.value) {
-//     imageElement.value.src = croppedDataURL;
-//     fileUri.value = croppedDataURL;
-
-
-    
-//   }
-//   cropper.destroy();
-//     }
-    
-// //   watch(isCropping, async (isCropping) => {
-// //   if (isCropping) {
-// //     // Initialize Cropper when starting to crop
-// //     if (cropper) {
-// //       cropper.destroy();
-// //     }
-// //     nextTick(() => {
-// //       if (imageElement.value) {
-// //         cropper = new Cropper(imageElement.value, {
-// //           dragMode: 'crop',
-// //           cropBoxMovable: true,
-// //           cropBoxResizable: true,
-// //           // Other cropper options as needed
-// //         });
-// //       }
-// //     });
-// //   } else {
-// //     // Handle cropping completion
-// //     if (cropper) {
-// //       const croppedDataURL = cropper.getCroppedCanvas().toDataURL("image/png");
-// //       cropper.destroy();
-// //       await updateCroppedImage(croppedDataURL);
-// //     }
-// //   }
-// // });
-
-   
-// // async function updateCroppedImage(dataURL: string) {
-// //   const blob = await fetch(dataURL).then(r => r.blob());
-// //   file.value = new File([blob], "cropped-image.png", { type: "image/png" });
-// //   fileUri.value = dataURL;
-// //   if (imageElement.value) {
-// //     imageElement.value.src = dataURL;
-// //   }
-// // }
-
-    
-//     // if (cropper) {
-//     //     cropper.destroy();
-//     //   };
-//        };
-// })
-watch(isCropping, async (isCropping) => {
-  if (isCropping) {
-    // Initialize Cropper when starting to crop
-    if (cropper) {
-      cropper.destroy();
-    }
-    nextTick(() => {
-      if (imageElement.value) {
-        cropper = new Cropper(imageElement.value, {
-          dragMode: 'crop',
-          cropBoxMovable: true,
-          cropBoxResizable: true,
-          // Other cropper options as needed
-        });
-      }
     });
-  } else {
-    // Handle cropping completion
+    
+  }
+  else{
     if (cropper) {
       const croppedDataURL = cropper.getCroppedCanvas().toDataURL("image/png");
-      cropper.destroy();
-      await updateCroppedImage(croppedDataURL);
+      // Rest of the code...
+      if (imageElement.value) {
+    imageElement.value.src = croppedDataURL;
+    fileUri.value = croppedDataURL;
+
+
+    
+  }
+  cropper.destroy();
     }
   }
-});
 
-async function updateCroppedImage(dataURL: string) {
-  const blob = await fetch(dataURL).then(r => r.blob());
-  file.value = new File([blob], "cropped-image.png", { type: "image/png" });
-  fileUri.value = dataURL;
-  if (imageElement.value) {
-    imageElement.value.src = dataURL;
-  }
-}
+})
+    
+
+
+   
+
+// watch(isCropping, async (isCropping) => {
+//   if (isCropping) {
+//     // Initialize Cropper when starting to crop
+//     if (cropper) {
+//       cropper.destroy();
+//     }
+//     nextTick(() => {
+//       if (imageElement.value) {
+//         cropper = new Cropper(imageElement.value, {
+//           dragMode: 'crop',
+//           cropBoxMovable: true,
+//           cropBoxResizable: true,
+//           // Other cropper options as needed
+//         });
+//       }
+//     });
+//   } else {
+//     // Handle cropping completion
+//     if (cropper) {
+//       const croppedDataURL = cropper.getCroppedCanvas().toDataURL("image/png");
+//       cropper.destroy();
+//       await updateCroppedImage(croppedDataURL);
+//     }
+//   }
+// });
+
+// async function updateCroppedImage(dataURL: string) {
+//   const blob = await fetch(dataURL).then(r => r.blob());
+//   file.value = new File([blob], "cropped-image.png", { type: "image/png" });
+//   fileUri.value = dataURL;
+//   if (imageElement.value) {
+//     imageElement.value.src = dataURL;
+//   }
+// }
       
 
 interface TaskResult {
